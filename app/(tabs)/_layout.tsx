@@ -1,6 +1,9 @@
+import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Link, Redirect, Tabs } from 'expo-router';
 import { Pressable, StyleSheet } from 'react-native';
+import { useTheme } from 'tamagui';
+import { useSession } from '~/components/SessionContextProvider';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -10,10 +13,24 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
+  const theme = useTheme();
+
+  const { session } = useSession();
+
+  if (!session) {
+    return <Redirect href="/sign-in" />;
+  }
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: 'black',
+        headerStyle: {
+          backgroundColor: theme.background.val,
+        },
+        headerTitleStyle: {
+          color: theme.color.val,
+        },
       }}>
       <Tabs.Screen
         name="index"
@@ -24,10 +41,10 @@ export default function TabLayout() {
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
+                  <Ionicons
+                    name="person-circle-outline"
                     size={25}
-                    color="gray"
+                    color={theme.color.val}
                     style={[styles.headerRight, { opacity: pressed ? 0.5 : 1 }]}
                   />
                 )}
