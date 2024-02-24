@@ -35,3 +35,5 @@ export default function RootLayout() {
     </TamaguiProvider>
   );
 }
+
+//? supabase next steps https://docs.expo.dev/guides/using-supabase/#next-steps
