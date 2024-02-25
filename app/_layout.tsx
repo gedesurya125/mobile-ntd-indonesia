@@ -5,8 +5,9 @@ import { TamaguiProvider } from 'tamagui';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 
 import config from '../tamagui.config';
-import { useColorScheme } from 'react-native';
+import { AppRegistry, useColorScheme } from 'react-native';
 import { SessionProvider } from '~/components/SessionContextProvider';
+import { ApolloClientProvider } from '~/apollo/client';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,17 +33,21 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <SessionProvider>
-      <TamaguiProvider config={config} defaultTheme={colorScheme as string}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
-        </ThemeProvider>
-      </TamaguiProvider>
-    </SessionProvider>
+    <ApolloClientProvider>
+      <SessionProvider>
+        <TamaguiProvider config={config} defaultTheme={colorScheme as string}>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            </Stack>
+          </ThemeProvider>
+        </TamaguiProvider>
+      </SessionProvider>
+    </ApolloClientProvider>
   );
 }
 
 //? supabase next steps https://docs.expo.dev/guides/using-supabase/#next-steps
+
+// AppRegistry.registerComponent('MyApplication', () => RootLayout);

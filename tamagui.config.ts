@@ -2,9 +2,9 @@ import { createAnimations } from '@tamagui/animations-react-native';
 import { createInterFont } from '@tamagui/font-inter';
 import { createMedia } from '@tamagui/react-native-media-driver';
 import { shorthands } from '@tamagui/shorthands';
-import { themes, tokens } from '@tamagui/themes';
+import { tokens } from '@tamagui/themes';
 import { createTamagui, styled, SizableText, H1, YStack } from 'tamagui';
-import * as themeColors from 'themes/colors';
+import themes from 'themes';
 
 const animations = createAnimations({
   bouncy: {
@@ -61,26 +61,7 @@ const config = createTamagui({
     body: bodyFont,
     heading: headingFont,
   },
-  themes: {
-    ...themes,
-    dark: {
-      ...themes.dark,
-      primary: themeColors.primaryDark.primary2,
-      secondary: themeColors.secondaryDark.secondary2,
-      background: themeColors.primaryDark.primary3,
-      tertiary: themeColors.tertiaryDark.tertiary2,
-      color: themeColors.colorDark.color1,
-    },
-    //? at the moment we are not using light color
-    light: {
-      ...themes.light,
-      primary: themeColors.primaryDark.primary2,
-      secondary: themeColors.secondaryDark.secondary2,
-      tertiary: themeColors.tertiaryDark.tertiary2,
-      background: '#ffffff',
-      color: '#000000',
-    },
-  },
+  themes,
   tokens,
   media: createMedia({
     xs: { maxWidth: 660 },
