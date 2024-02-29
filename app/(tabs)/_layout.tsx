@@ -39,7 +39,7 @@ export default function TabLayout() {
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home-outline" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/profile" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <Ionicons
